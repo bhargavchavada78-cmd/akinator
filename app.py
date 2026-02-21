@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, session
 import numpy as np
 import pickle
+import os
 
 app = Flask(__name__)
 app.secret_key = "supersecretkey"
@@ -64,4 +65,5 @@ def answer():
                            total=len(questions))
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    port = int(os.environ.get("port",10000))
+    app.run(host="0.0.0.0",port=port)
