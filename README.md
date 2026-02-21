@@ -21,7 +21,7 @@ This project asks users a series of yes/no questions and predicts the character 
 - Python
 - Flask
 - HTML & CSS
-- Scikit-Learn
+- Scikit-Learn(tree)
 - Pandas & NumPy
 - Pickle (for saving ML model)
 
