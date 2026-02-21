@@ -1,0 +1,138 @@
+templates/index.html
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Akinator AI</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #141e30, #243b55);
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .card {
+            background: #1e1e2f;
+            padding: 40px;
+            border-radius: 20px;
+            width: 450px;
+            text-align: center;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.6);
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+        }
+
+        .progress-text {
+            font-size: 14px;
+            margin-bottom: 10px;
+            opacity: 0.8;
+        }
+
+        .progress-bar {
+            background: #333;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 20px;
+            height: 8px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: #00c6ff;
+            transition: width 0.4s ease;
+        }
+
+        .btn {
+            padding: 12px 25px;
+            margin: 10px;
+            border-radius: 10px;
+            border: none;
+            font-size: 16px;
+            cursor: pointer;
+            transition: transform 0.2s, opacity 0.2s;
+        }
+
+        .yes {
+            background: #00c853;
+            color: white;
+        }
+
+        .no {
+            background: #d50000;
+            color: white;
+        }
+
+        .btn:hover {
+            transform: scale(1.05);
+            opacity: 0.9;
+        }
+
+        .result {
+            margin-top: 20px;
+            font-size: 22px;
+        }
+
+        .restart {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background: #00c6ff;
+            border-radius: 8px;
+            text-decoration: none;
+            color: white;
+        }
+
+        .restart:hover {
+            background: #0072ff;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+<div class="card">
+
+    {% if question %}
+
+        <div class="progress-text">
+            Question {{ progress }} / {{ total }}
+        </div>
+
+        <div class="progress-bar">
+            <div class="progress-fill"
+                 style="width: {{ (progress / total) * 100 }}%;">
+            </div>
+        </div>
+
+        <h2>{{ question }}</h2>
+
+        <form action="/answer" method="POST">
+            <button class="btn yes" name="answer" value="yes">Yes</button>
+            <button class="btn no" name="answer" value="no">No</button>
+        </form>
+
+    {% endif %}
+
+    {% if result %}
+        <div class="result">
+            I guess: <strong>{{ result }}</strong>
+        </div>
+        <a href="/" class="restart">Play Again</a>
+    {% endif %}
+
+</div>
+
+</body>
+</html>
